@@ -1,0 +1,12 @@
+# STS / Eclipse specific
+.metadata/
+.classpath
+.project
+.settings/
+bin/
+build/
+
+# Maven specific
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties

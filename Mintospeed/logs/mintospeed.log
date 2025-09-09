@@ -1,0 +1,628 @@
+2025-09-10 01:15:14 [restartedMain] INFO  c.mintospeed.MintospeedApplication - Starting MintospeedApplication using Java 21.0.7 with PID 6132 (C:\Users\sprak\Desktop\mintospeed-backend\Mintospeed\target\classes started by sprak in C:\Users\sprak\Desktop\mintospeed-backend\Mintospeed)
+2025-09-10 01:15:14 [restartedMain] DEBUG c.mintospeed.MintospeedApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-10 01:15:14 [restartedMain] INFO  c.mintospeed.MintospeedApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 01:15:14 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-10 01:15:14 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-10 01:15:15 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-10 01:15:15 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78 ms. Found 5 JPA repository interfaces.
+2025-09-10 01:15:16 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-10 01:15:16 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-10 01:15:16 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-10 01:15:16 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-10 01:15:16 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1698 ms
+2025-09-10 01:15:16 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-10 01:15:16 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-10 01:15:16 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-10 01:15:17 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-10 01:15:17 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-10 01:15:18 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@45d1e08a
+2025-09-10 01:15:18 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-10 01:15:18 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 01:15:18 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.43
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-10 01:15:19 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table cart_items (
+        cart_item_id bigint not null auto_increment,
+        quantity integer,
+        cart_id bigint,
+        item_id bigint,
+        primary key (cart_item_id)
+    ) engine=InnoDB
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table carts (
+        cart_id bigint not null auto_increment,
+        created_at datetime(6),
+        user_id bigint,
+        primary key (cart_id)
+    ) engine=InnoDB
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table categories (
+        category_id bigint not null auto_increment,
+        description varchar(255),
+        name varchar(255) not null,
+        primary key (category_id)
+    ) engine=InnoDB
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table items (
+        item_id bigint not null auto_increment,
+        active bit,
+        description varchar(255),
+        image_url varchar(255),
+        name varchar(255) not null,
+        price decimal(38,2) not null,
+        stock_quantity integer not null,
+        category_id bigint,
+        primary key (item_id)
+    ) engine=InnoDB
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table users (
+        user_id bigint not null auto_increment,
+        created_at datetime(6) not null,
+        email varchar(255) not null,
+        name varchar(255) not null,
+        password_hash varchar(255) not null,
+        phone varchar(255),
+        role varchar(255) not null,
+        primary key (user_id)
+    ) engine=InnoDB
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table carts 
+       drop index UK64t7ox312pqal3p7fg9o503c2
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table carts 
+       add constraint UK64t7ox312pqal3p7fg9o503c2 unique (user_id)
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       drop index UK6dotkott2kjsp8vw4d0m25fb7
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       add constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email)
+2025-09-10 01:15:19 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table cart_items 
+       add constraint FKpcttvuq4mxppo8sxggjtn5i2c 
+       foreign key (cart_id) 
+       references carts (cart_id)
+2025-09-10 01:15:20 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table cart_items 
+       add constraint FKltfd9saov13a3fj9g0spdl4xb 
+       foreign key (item_id) 
+       references items (item_id)
+2025-09-10 01:15:20 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table carts 
+       add constraint FKb5o626f86h46m4s7ms6ginnop 
+       foreign key (user_id) 
+       references users (user_id)
+2025-09-10 01:15:20 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table items 
+       add constraint FKjcdcde7htb3tyjgouo4g9xbmr 
+       foreign key (category_id) 
+       references categories (category_id)
+2025-09-10 01:15:20 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10 01:15:20 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-10 01:15:21 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 01:15:21 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-10 01:15:21 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-09-10 01:15:21 [restartedMain] INFO  c.mintospeed.MintospeedApplication - Started MintospeedApplication in 7.828 seconds (process running for 8.725)
+2025-09-10 01:15:44 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-10 01:15:44 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-10 01:15:44 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-09-10 01:15:44 [http-nio-8080-exec-1] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /
+2025-09-10 01:15:44 [http-nio-8080-exec-1] WARN  o.s.web.servlet.PageNotFound - No endpoint GET /.
+2025-09-10 01:15:44 [http-nio-8080-exec-2] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /favicon.ico
+2025-09-10 01:15:44 [http-nio-8080-exec-2] WARN  o.s.web.servlet.PageNotFound - No endpoint GET /favicon.ico.
+2025-09-10 01:16:13 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-09-10 01:16:19 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-09-10 01:16:19 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-10 01:16:19 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-10 01:16:19 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10 01:16:20 [RMI TCP Connection(9)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-10 01:16:20 [RMI TCP Connection(9)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-10 01:18:16 [restartedMain] INFO  c.mintospeed.MintospeedApplication - Starting MintospeedApplication using Java 21.0.7 with PID 15520 (C:\Users\sprak\Desktop\mintospeed-backend\Mintospeed\target\classes started by sprak in C:\Users\sprak\Desktop\mintospeed-backend\Mintospeed)
+2025-09-10 01:18:16 [restartedMain] DEBUG c.mintospeed.MintospeedApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-10 01:18:16 [restartedMain] INFO  c.mintospeed.MintospeedApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 01:18:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-10 01:18:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-10 01:18:17 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-10 01:18:17 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 75 ms. Found 5 JPA repository interfaces.
+2025-09-10 01:18:17 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-10 01:18:17 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-10 01:18:17 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-10 01:18:18 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-10 01:18:18 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1595 ms
+2025-09-10 01:18:18 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-10 01:18:18 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-10 01:18:18 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-10 01:18:18 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-10 01:18:18 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-10 01:18:18 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d7a491
+2025-09-10 01:18:18 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-10 01:18:18 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 01:18:18 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.43
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-10 01:18:20 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-10 01:18:20 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10 01:18:20 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-10 01:18:21 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 01:18:21 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-10 01:18:21 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-09-10 01:18:21 [restartedMain] INFO  c.mintospeed.MintospeedApplication - Started MintospeedApplication in 6.221 seconds (process running for 7.103)
+2025-09-10 01:18:30 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-10 01:18:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-10 01:18:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-09-10 01:18:30 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-09-10 01:24:13 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:24:13 [http-nio-8080-exec-4] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:24:13 [http-nio-8080-exec-4] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: com.mintospeed.exception.ResourceNotFoundException: User not found with id: 1] with root cause
+com.mintospeed.exception.ResourceNotFoundException: User not found with id: 1
+	at com.mintospeed.service.CartServiceImpl.lambda$6(CartServiceImpl.java:143)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.mintospeed.service.CartServiceImpl.getOrCreateUserCartEntity(CartServiceImpl.java:143)
+	at com.mintospeed.service.CartServiceImpl.addItemToCart(CartServiceImpl.java:46)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.mintospeed.service.CartServiceImpl$$SpringCGLIB$$0.addItemToCart(<generated>)
+	at com.mintospeed.controller.CartController.addItemToCart(CartController.java:25)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-09-10 01:24:54 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:24:54 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:24:54 [http-nio-8080-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: com.mintospeed.exception.ResourceNotFoundException: User not found with id: 1] with root cause
+com.mintospeed.exception.ResourceNotFoundException: User not found with id: 1
+	at com.mintospeed.service.CartServiceImpl.lambda$6(CartServiceImpl.java:143)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.mintospeed.service.CartServiceImpl.getOrCreateUserCartEntity(CartServiceImpl.java:143)
+	at com.mintospeed.service.CartServiceImpl.getUserCart(CartServiceImpl.java:128)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.mintospeed.service.CartServiceImpl$$SpringCGLIB$$0.getUserCart(<generated>)
+	at com.mintospeed.controller.CartController.getCart(CartController.java:20)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-09-10 01:31:28 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:31:28 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:31:28 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.cart_id,
+        c1_0.created_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    left join
+        users u1_0 
+            on u1_0.user_id=c1_0.user_id 
+    where
+        u1_0.user_id=?
+2025-09-10 01:31:28 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:31:28 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        carts
+        (created_at, user_id) 
+    values
+        (?, ?)
+2025-09-10 01:31:28 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2025-09-10T01:31:28.598100300]
+2025-09-10 01:31:28 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.cart_id,
+        c1_0.created_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    left join
+        users u1_0 
+            on u1_0.user_id=c1_0.user_id 
+    where
+        u1_0.user_id=?
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.item_id,
+        i1_0.active,
+        c1_0.category_id,
+        c1_0.description,
+        c1_0.name,
+        i1_0.description,
+        i1_0.image_url,
+        i1_0.name,
+        i1_0.price,
+        i1_0.stock_quantity 
+    from
+        items i1_0 
+    left join
+        categories c1_0 
+            on c1_0.category_id=i1_0.category_id 
+    where
+        i1_0.item_id=?
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        ci1_0.cart_item_id,
+        ci1_0.cart_id,
+        ci1_0.item_id,
+        ci1_0.quantity 
+    from
+        cart_items ci1_0 
+    left join
+        carts c1_0 
+            on c1_0.cart_id=ci1_0.cart_id 
+    left join
+        items i1_0 
+            on i1_0.item_id=ci1_0.item_id 
+    where
+        c1_0.cart_id=? 
+        and i1_0.item_id=?
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        cart_items
+        (cart_id, item_id, quantity) 
+    values
+        (?, ?, ?)
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [1]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [2]
+2025-09-10 01:33:01 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        ci1_0.cart_id,
+        ci1_0.cart_item_id,
+        i1_0.item_id,
+        i1_0.active,
+        c2_0.category_id,
+        c2_0.description,
+        c2_0.name,
+        i1_0.description,
+        i1_0.image_url,
+        i1_0.name,
+        i1_0.price,
+        i1_0.stock_quantity,
+        ci1_0.quantity 
+    from
+        cart_items ci1_0 
+    left join
+        items i1_0 
+            on i1_0.item_id=ci1_0.item_id 
+    left join
+        categories c2_0 
+            on c2_0.category_id=i1_0.category_id 
+    where
+        ci1_0.cart_id=?
+2025-09-10 01:33:01 [http-nio-8080-exec-6] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:33:09 [http-nio-8080-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-09-10 01:34:48 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
+2025-09-10 01:35:16 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:35:16 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:35:16 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.cart_id,
+        c1_0.created_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    left join
+        users u1_0 
+            on u1_0.user_id=c1_0.user_id 
+    where
+        u1_0.user_id=?
+2025-09-10 01:35:16 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:35:16 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        ci1_0.cart_id,
+        ci1_0.cart_item_id,
+        i1_0.item_id,
+        i1_0.active,
+        c2_0.category_id,
+        c2_0.description,
+        c2_0.name,
+        i1_0.description,
+        i1_0.image_url,
+        i1_0.name,
+        i1_0.price,
+        i1_0.stock_quantity,
+        ci1_0.quantity 
+    from
+        cart_items ci1_0 
+    left join
+        items i1_0 
+            on i1_0.item_id=ci1_0.item_id 
+    left join
+        categories c2_0 
+            on c2_0.category_id=i1_0.category_id 
+    where
+        ci1_0.cart_id=?
+2025-09-10 01:35:16 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:36:41 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:36:41 [http-nio-8080-exec-5] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:36:41 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.cart_id,
+        c1_0.created_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    left join
+        users u1_0 
+            on u1_0.user_id=c1_0.user_id 
+    where
+        u1_0.user_id=?
+2025-09-10 01:36:41 [http-nio-8080-exec-5] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:36:41 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        ci1_0.cart_id,
+        ci1_0.cart_item_id,
+        i1_0.item_id,
+        i1_0.active,
+        c2_0.category_id,
+        c2_0.description,
+        c2_0.name,
+        i1_0.description,
+        i1_0.image_url,
+        i1_0.name,
+        i1_0.price,
+        i1_0.stock_quantity,
+        ci1_0.quantity 
+    from
+        cart_items ci1_0 
+    left join
+        items i1_0 
+            on i1_0.item_id=ci1_0.item_id 
+    left join
+        categories c2_0 
+            on c2_0.category_id=i1_0.category_id 
+    where
+        ci1_0.cart_id=?
+2025-09-10 01:36:41 [http-nio-8080-exec-5] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:44:18 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password_hash,
+        u1_0.phone,
+        u1_0.role 
+    from
+        users u1_0 
+    where
+        u1_0.user_id=?
+2025-09-10 01:44:18 [http-nio-8080-exec-7] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:44:18 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.cart_id,
+        c1_0.created_at,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    left join
+        users u1_0 
+            on u1_0.user_id=c1_0.user_id 
+    where
+        u1_0.user_id=?
+2025-09-10 01:44:18 [http-nio-8080-exec-7] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:44:18 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        ci1_0.cart_id,
+        ci1_0.cart_item_id,
+        i1_0.item_id,
+        i1_0.active,
+        c2_0.category_id,
+        c2_0.description,
+        c2_0.name,
+        i1_0.description,
+        i1_0.image_url,
+        i1_0.name,
+        i1_0.price,
+        i1_0.stock_quantity,
+        ci1_0.quantity 
+    from
+        cart_items ci1_0 
+    left join
+        items i1_0 
+            on i1_0.item_id=ci1_0.item_id 
+    left join
+        categories c2_0 
+            on c2_0.category_id=i1_0.category_id 
+    where
+        ci1_0.cart_id=?
+2025-09-10 01:44:18 [http-nio-8080-exec-7] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2025-09-10 01:44:24 [RMI TCP Connection(34)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-09-10 01:44:24 [RMI TCP Connection(34)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-10 01:44:24 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-10 01:44:24 [RMI TCP Connection(34)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10 01:44:24 [RMI TCP Connection(34)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-10 01:44:24 [RMI TCP Connection(34)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
