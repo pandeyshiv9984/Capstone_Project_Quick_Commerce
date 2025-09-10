@@ -1,0 +1,64 @@
+:root{
+  --brand:#ff4d4f;
+  --muted:#6c757d;
+  --card-shadow: 0 6px 18px rgba(38,38,38,0.06);
+}
+
+body{
+  background: linear-gradient(180deg, #fff 0%, #f8f9fb 100%);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  padding: 2rem 0;
+}
+
+.complaint-card{
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.brand-bar{
+  background: linear-gradient(90deg,var(--brand), #ff7a7a);
+  height: 8px;
+}
+
+.logo{
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.2px;
+}
+
+.logo span.green {
+  color: #28a745; /* green */
+}
+
+.logo span.black {
+  color: #000; /* black */
+}
+
+
+.small-note{
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form-section {
+  padding: 1.25rem;
+}
+
+.file-preview {
+  max-width: 120px;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+@media (min-width: 992px){
+  .container { max-width: 980px; }
+}
