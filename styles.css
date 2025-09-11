@@ -1,5 +1,6 @@
 :root{
-  --brand:#ff4d4f;
+  --brand:#28a745; /* main green */
+  --brand-light:#5cd65c; /* lighter green */
   --muted:#6c757d;
   --card-shadow: 0 6px 18px rgba(38,38,38,0.06);
 }
@@ -18,7 +19,7 @@ body{
 }
 
 .brand-bar{
-  background: linear-gradient(90deg,var(--brand), #ff7a7a);
+  background: linear-gradient(90deg,var(--brand), var(--brand-light));
   height: 8px;
 }
 
@@ -29,13 +30,12 @@ body{
 }
 
 .logo span.green {
-  color: #28a745; /* green */
+  color: var(--brand); /* green */
 }
 
 .logo span.black {
   color: #000; /* black */
 }
-
 
 .small-note{
   color: var(--muted);
@@ -57,6 +57,39 @@ body{
 .help-text {
   font-size: 0.9rem;
   color: var(--muted);
+}
+
+/* Buttons in green-black theme */
+.btn-primary {
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+
+.btn-primary:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-outline-secondary {
+  color: #000;
+  border-color: #000;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Input focus in green */
+.form-control:focus, .form-select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.2rem rgba(40,167,69,0.25);
+}
+
+/* Checkbox accent in green */
+.form-check-input:checked {
+  background-color: var(--brand);
+  border-color: var(--brand);
 }
 
 @media (min-width: 992px){
