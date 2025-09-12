@@ -1,1 +1,0 @@
-# Capstone_Project_Quick_Commerce
