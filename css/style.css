@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+#categories img{
+    width: 80px;
+    height: 40px;
+}
+img{
+    height: 20rem;
+   
+}
+
+.btn-button {
+    background-color: #0faa3e;
+    color: white;
+    
+}
+button a{
+    text-decoration: none;
+    color: white;
+}
