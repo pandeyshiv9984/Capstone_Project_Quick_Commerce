@@ -24,17 +24,9 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@GetMapping("/hi")
-	public String user(Authentication authentication) {
-		System.out.println("hi hit: "+authentication.getName());
-		return "User Profile";
-	}
-	
 	@GetMapping("/profile")
 	public ResponseEntity<?> userProfile(Authentication authentication) {
-		System.out.println(authentication);
 		String email = authentication.getName();
-		System.out.println("Get request is hit for :"+email);
 		User user = userRepository.findByEmail(email)
 				.orElseThrow(() -> new RuntimeException("User is not authenticated."));
 		return ResponseEntity.ok(user);

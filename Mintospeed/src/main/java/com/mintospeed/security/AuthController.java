@@ -34,23 +34,19 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @GetMapping("/test")
-    public String test() {
-    	return "Server is running";
-    }
     
     //Login Endpoint
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDto loginRequest) {
     	try {
-    		System.out.println("Login reached 1: "+loginRequest.getEmail());
             Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
             );
-            System.out.println("Login reached 2: "+loginRequest.getPassword());
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            
             String token = jwtUtil.generateToken(((UserDetails) authentication.getPrincipal()).getUsername());
             return ResponseEntity.ok(new JwtResponseDto(token));
+            
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         } catch (UsernameNotFoundException ex) {
@@ -68,9 +64,6 @@ public class AuthController {
     //Signup Endpoint
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupRequestDto signupRequest) {
-//        if (userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
-//            return ResponseEntity.badRequest().body("Username is already taken!");
-//        }
 
         if (userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().body("Email is already in use!");
