@@ -19,28 +19,29 @@ public class OrderService {
 
     public Order createOrder(CreateOrderRequest request) {
         Order order = new Order();
-        order.setUserId(request.getUserId());
-        order.setAddressId(request.getAddressId());
-        order.setCouponId(request.getCouponId());
-        order.setTotalAmount(request.getTotalAmount());
-        order.setDiscount(request.getDiscount());
-        order.setStatus("PLACED");
-        order.setEtaMinutes(30);
-        order.setCreatedAt(LocalDateTime.now());
-
-        List<OrderItem> orderItems = request.getOrderItems().stream()
-                .map(itemDto -> {
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.setOrder(order);
-                    orderItem.setItemId(itemDto.getItemId());
-                    orderItem.setQuantity(itemDto.getQuantity());
-                    orderItem.setPrice(itemDto.getPrice());
-                    return orderItem;
-                })
-                .collect(Collectors.toList());
-
-        order.setOrderItems(orderItems);
-        return orderRepository.save(order);
+        return order;
+//        order.setUserId(request.getUserId());
+//        order.setAddressId(request.getAddressId());
+//        order.setCouponId(request.getCouponId());
+//        order.setTotalAmount(request.getTotalAmount());
+//        order.setDiscount(request.getDiscount());
+//        order.setStatus("PLACED");
+//        order.setEtaMinutes(30);
+//        order.setCreatedAt(LocalDateTime.now());
+//
+//        List<OrderItem> orderItems = request.getOrderItems().stream()
+//                .map(itemDto -> {
+//                    OrderItem orderItem = new OrderItem();
+//                    orderItem.setOrder(order);
+//                    orderItem.setItemId(itemDto.getItemId());
+//                    orderItem.setQuantity(itemDto.getQuantity());
+//                    orderItem.setPrice(itemDto.getPrice());
+//                    return orderItem;
+//                })
+//                .collect(Collectors.toList());
+//
+//        order.setOrderItems(orderItems);
+//        return orderRepository.save(order);
     }
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepository.findById(orderId);
