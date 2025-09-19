@@ -14,6 +14,7 @@ public class Category {
 
     private String description;
 
+
     // Constructors, Getters and Setters
     public Category() {}
 
